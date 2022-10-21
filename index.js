@@ -7,5 +7,8 @@ import Puppeteer from "puppeteer";
 
   await page.click("a[href='/login']");
 
+  await page.type("#username", "admin");
+  await page.type("#password", "admin");
+
   //   await browser.close();
 })();
