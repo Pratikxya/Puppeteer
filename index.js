@@ -1,17 +1,14 @@
 import Puppeteer from "puppeteer";
-import dotenv from "dotenv";
-
-dotenv.config();
-const username = process.env.MYNAME;
-const password = process.env.PASSWORD;
 
 (async () => {
   const browser = await Puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto("https://quotes.toscrape.com/");
-
-  await page.click("a[href='/login']");
-
-  await page.type("#username", username);
-  await page.type("#password", password);
+  // await page.setDefaultNavigationTimeout(0);
+  await page.goto("https://www.collegenote.net/courses/TU/CSIT/", {
+    waitUntil: "load",
+    // Remove the timeout
+    timeout: 0,
+  });
+  await page.pdf({ path: "Collegenotes.pdf", format: "A4" });
+  await browser.close();
 })();
