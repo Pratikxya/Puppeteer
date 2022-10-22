@@ -1,18 +1,22 @@
+//packages
 import Puppeteer from "puppeteer";
+import axios from "axios";
+import cheerio from "cheerio";
 
-(async () => {
-  const browser = await Puppeteer.launch();
-  const page = await browser.newPage();
-  await page.goto("https://www.collegenote.net/courses/TU/CSIT/");
+const url = "http://hamropasal.42web.io/product/boncellensis-secullant/";
 
-  const getDimensions = await page.evaluate(() => {
-    return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight,
-    };
-  });
+const product = { name: "", price: "", link: "" };
 
-  console.log(getDimensions);
+async function scrape() {
+  //fetching data
+  const { data } = await axios.get(url);
 
-  await browser.close();
-})();
+  //load up the html
+  const $ = cheerio.load(data);
+
+  //Extract the data that we need
+  product.name = $().find("h1").text();
+  console.log(product);
+}
+
+scrape();
