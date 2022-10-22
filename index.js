@@ -9,6 +9,7 @@ async function scrape() {
   const $ = cheerio.load(data.data);
   const listItems = $(".mt-3");
   console.log(listItems.length);
+  const Notices = [];
   listItems.each(function (idx, el) {
     const title = $(el).children("a").children("b").text();
     const date = $(el).children("small").text();
@@ -19,7 +20,8 @@ async function scrape() {
       date,
       link,
     };
-    console.log(notices);
+    Notices.push(notices);
   });
+  console.log(Notices);
 }
 scrape();
