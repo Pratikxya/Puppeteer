@@ -9,19 +9,19 @@ async function scrape() {
   const $ = cheerio.load(data.data);
   const listItems = $(".mt-3");
   console.log(listItems.length);
-  const Notices = [];
+  const notices = [];
   listItems.each(function (idx, el) {
     const title = $(el).children("a").children("b").text();
     const date = $(el).children("small").text();
     const link = $(el).children("a").attr("href");
 
-    const notices = {
+    const notice = {
       title,
       date,
       link,
     };
-    Notices.push(notices);
+    notices.push(notice);
   });
-  console.log(Notices);
+  console.log(notices);
 }
 scrape();
