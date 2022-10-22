@@ -8,7 +8,6 @@ const url = "https://www.tuiost.edu.np/notices";
 async function scrape() {
   //fetching data
   const data = await axios.get(url);
-  // console.log(data);
 
   //loading
   const $ = cheerio.load(data.data);
