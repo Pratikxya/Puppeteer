@@ -3,20 +3,18 @@ import Puppeteer from "puppeteer";
 import axios from "axios";
 import cheerio from "cheerio";
 
-const url = "http://hamropasal.42web.io/product/boncellensis-secullant/";
-
-const product = { name: "", price: "", link: "" };
+const url = "https://www.tuiost.edu.np/notices";
 
 async function scrape() {
   //fetching data
-  const { data } = await axios.get(url);
+  const data = await axios.get(url);
+  // console.log(data);
 
-  //load up the html
-  const $ = cheerio.load(data);
+  //loading
+  const $ = cheerio.load(data.data);
 
-  //Extract the data that we need
-  product.name = $().find("h1").text();
-  console.log(product);
+  const res = $(`.mt-3`).text();
+  console.log(res);
 }
 
 scrape();
