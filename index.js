@@ -17,8 +17,11 @@ async function scrape() {
   listItems.each(function (idx, el) {
     const title = $(el).children("a").text();
     const date = $(el).children("small").text();
+    const link = $(el).children("a").attr("href");
+
     console.log(title);
     console.log(date);
+    console.log(link);
   });
 }
 scrape();
