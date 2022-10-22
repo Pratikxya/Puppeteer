@@ -9,11 +9,13 @@ async function scrape() {
   //fetching data
   const data = await axios.get(url);
 
-  //loading
+  //loading data into cheerio
   const $ = cheerio.load(data.data);
 
-  const res = $(`.mt-3`).text();
-  console.log(res);
+  const listItems = $(".mt-3");
+  console.log(listItems.length);
+  listItems.each(function (idx, el) {
+    console.log($(el).text());
+  });
 }
-
 scrape();
