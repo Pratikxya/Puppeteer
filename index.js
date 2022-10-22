@@ -2,7 +2,7 @@ import Puppeteer from "puppeteer";
 import axios from "axios";
 import cheerio from "cheerio";
 const url = "https://www.tuiost.edu.np/notices";
-async function scrape() {
+const scrape = async () => {
   //fetching data
   const data = await axios.get(url);
   //loading data into cheerio
@@ -10,7 +10,8 @@ async function scrape() {
   const listItems = $(".mt-3");
   console.log(listItems.length);
   const notices = [];
-  listItems.each(function (idx, el) {
+
+  listItems.each((idx, el) => {
     const title = $(el).children("a").children("b").text();
     const date = $(el).children("small").text();
     const link = $(el).children("a").attr("href");
@@ -23,5 +24,5 @@ async function scrape() {
     notices.push(notice);
   });
   console.log(notices);
-}
+};
 scrape();
