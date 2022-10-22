@@ -16,7 +16,9 @@ async function scrape() {
   console.log(listItems.length);
   listItems.each(function (idx, el) {
     const title = $(el).children("a").text();
+    const date = $(el).children("small").text();
     console.log(title);
+    console.log(date);
   });
 }
 scrape();
